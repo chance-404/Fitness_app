@@ -6,6 +6,7 @@ import com.fitness.userservice.dto.RegisterRequest;
 import com.fitness.userservice.dto.UserResponse;
 import com.fitness.userservice.model.User;
 
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
