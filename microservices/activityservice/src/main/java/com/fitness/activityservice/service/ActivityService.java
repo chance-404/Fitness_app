@@ -1,5 +1,8 @@
 package com.fitness.activityservice.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.fitness.activityservice.dto.ActivityRequest;
@@ -44,6 +47,20 @@ public class ActivityService {
 			response.setUpdatedAt(activity.getUpdatedAt());
 			return response;
 		}
+
+		public List<ActivityResponse> getUserActivites(String userId) {
+			List<Activity> activities = activityRepository.findByUserId(userId);
+			return activities.stream()
+					.map(this::mapToResponse)
+					.collect(Collectors.toList());
+		}
+
+		public ActivityResponse getActivityById(String activityId) {
+			return activityRepository.findById(activityId)
+					.map(this::mapToResponse)
+					.orElseThrow(() -> new RuntimeException("Activity with id: " + activityId + " not found"));
+		}
+		
 	}
 
 
